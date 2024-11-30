@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://3knbfyyeqtox"]
+
+[ext_resource type="PackedScene" uid="uid://dvgeo1fjxe7w3" path="res://Assets/Models/Direction_Arrow.glb" id="1_ya7cc"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="2_7chbi"]
+[ext_resource type="PackedScene" uid="uid://dueshpaj6kek4" path="res://Assets/Models/Space_Ship.glb" id="3_82nvv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_25o0d"]
+size = Vector3(115.611, 1, 142.215)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8reke"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1b5jh"]
+albedo_color = Color(1, 0.270588, 1, 1)
+emission_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lfbh3"]
+size = Vector3(11.8523, 3.05951, 10.5516)
+
+[node name="Cursor" type="Node3D"]
+
+[node name="Direction_Arrow" parent="." instance=ExtResource("1_ya7cc")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.560841, -0.511131, 0.651308, 0, 0.786677, 0.617365, -0.827923, -0.346244, 0.441201, 13.9159, 8.42264, 9.93912)
+current = true
+script = ExtResource("2_7chbi")
+
+[node name="ZeroPlane" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZeroPlane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_25o0d")
+
+[node name="CursorPointer" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_8reke")
+surface_material_override/0 = SubResource("StandardMaterial3D_1b5jh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.77675, 0, -0.629809, 0.426416, 0.735932, 0.525903, 0.463496, -0.677056, 0.571635, -6.53956, 4.80616, 5.5628)
+shadow_enabled = true
+
+[node name="Space_Ship" type="RigidBody3D" parent="."]
+
+[node name="Space_Ship_Mesh" parent="Space_Ship" instance=ExtResource("3_82nvv")]
+
+[node name="Space_Ship_Collision" type="CollisionShape3D" parent="Space_Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.114975, 0.483795, 0.338318)
+shape = SubResource("BoxShape3D_lfbh3")
