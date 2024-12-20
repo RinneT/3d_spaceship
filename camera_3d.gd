@@ -27,7 +27,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	set_cursor_position(delta)
-	ship.apply_torque(torque)
+	#ship.apply_torque(torque)
 
 func set_cursor_position(delta: float):
 	# https://www.youtube.com/watch?v=mJRDyXsxT9g
@@ -52,8 +52,8 @@ func set_cursor_position(delta: float):
 		# Make the direction arrow look at the collision position
 		arrow.look_at(pos, Vector3.UP)
 		
-		var torque_vec = get_torque_vector(ship, pos)
-		ship.apply_torque(torque_vec)
+		#var torque_vec = get_torque_vector(ship, pos)
+		#ship.apply_torque(torque_vec)
 		
 
 # Find the desired rotation torque vector
@@ -70,6 +70,8 @@ func get_torque_vector(source : RigidBody3D, target: Vector3) -> Vector3:
 	else:
 		axis = (1 / sin(angle/2)) * Vector3(quat_change.x, quat_change.y, quat_change.z)
 	var direction_vector = axis.normalized()
+	var rot := Vector3(source.rotation.x, source.rotation.z, source.rotation.y)
+	print("Angle: " + str(angle) + " : " + str(axis) + " : " + str(rot.signed_angle_to(target, Vector3.UP)))
 
 	return pid_control(angle, direction_vector, source.angular_velocity)
 
@@ -93,5 +95,5 @@ func pid_control(angle: float, vector: Vector3, angular_velocity: Vector3) -> Ve
 		clamp(desired_torque.y, -max_torque_roll, max_torque_roll),
 		clamp(desired_torque.z, -max_torque_yaw, max_torque_yaw))
 	
-	print("PID: Angle: " + str(angle) + " Base Vector: " + str(vector) + " Proportionate: " + str(proportionate_vector) + " Derivative: " + str(derivative_vector) + " Integral: " + str(integral_vector) + " Desired Torque: " + str(desired_torque) + " Clamped Torque: " + str(torque_vector))
+	#print("PID: Angle: " + str(angle) + " Base Vector: " + str(vector) + " Proportionate: " + str(proportionate_vector) + " Derivative: " + str(derivative_vector) + " Integral: " + str(integral_vector) + " Desired Torque: " + str(desired_torque) + " Clamped Torque: " + str(torque_vector))
 	return torque_vector
