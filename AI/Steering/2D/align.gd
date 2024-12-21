@@ -27,8 +27,8 @@ func get_steering() -> SteeringOutput2D:
 	var rotation_direction: float = target.orientation - character.orientation
 	
 	# Map the result to the (-pi, pi) interval
-	var rotation = rotation_direction # TODO: remap()??
-	var rotation_size = abs(rotation_direction)
+	var rotation = wrapf(rotation_direction, -PI, PI)
+	var rotation_size = absf(rotation_direction)
 	
 	# Check if we are there, return no steering
 	if rotation_size < target_radius:
@@ -38,17 +38,17 @@ func get_steering() -> SteeringOutput2D:
 	# Otherwise, calculate a scaled rotation
 	var target_rotation = max_rotation
 	if rotation_size < slow_radius:
-		target_rotation = max_rotation * rotation_size / slow_radius
+		target_rotation *= rotation_size / slow_radius
 	
 	# The final target rotation combines speed and direction
 	target_rotation *= rotation / rotation_size
 	
 	# Acceleration tries to get to the target rotation
-	steering.angular = target.rotation - character.rotation
+	steering.angular = target_rotation - character.rotation
 	steering.angular /= time_to_target
 	
 	# Check if the acceleration is too great
-	var angular_acceleration: float = abs(steering.angular)
+	var angular_acceleration: float = absf(steering.angular)
 	if angular_acceleration > max_angular_acceleration:
 		steering.angular /= angular_acceleration
 		steering.angular *= max_angular_acceleration

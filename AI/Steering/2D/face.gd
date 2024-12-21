@@ -3,8 +3,6 @@ extends Align
 
 # Face algorithm to look at a given target
 func get_steering() -> SteeringOutput2D:
-	var predicted_target: Kinematic2D = target.clone()
-	
 	# Work out the distance to the target
 	var direction = target.position - character.position
 	
@@ -13,8 +11,7 @@ func get_steering() -> SteeringOutput2D:
 		return null
 	
 	# Put the target together
-	predicted_target.orientation = atan2(-direction.x, direction.y)
-	target = predicted_target
+	target.orientation = atan2(-direction.x, direction.y)
 	
 	# Delegate to align
 	return super.get_steering()
