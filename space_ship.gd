@@ -8,11 +8,12 @@ var pointer: Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	behaviour = Arrive.new()
-	behaviour.max_speed = 1.0
+	behaviour = Face.new()
+	behaviour.max_rotation = 1.0
 	behaviour.slow_radius = 15.0
-	behaviour.targetRadius = 1
+	behaviour.target_radius = 0.1
 	behaviour.time_to_target = 0.1
+	behaviour.max_angular_acceleration = 1.0
 	behaviour.character = character
 	behaviour.target = target
 	

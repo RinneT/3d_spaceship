@@ -1,11 +1,9 @@
 class_name Face
 extends Align
 
-
-
 # Face algorithm to look at a given target
 func get_steering() -> SteeringOutput2D:
-	var predicted_target: Kinematic2D = target.duplicate()
+	var predicted_target: Kinematic2D = target.clone()
 	
 	# Work out the distance to the target
 	var direction = target.position - character.position
