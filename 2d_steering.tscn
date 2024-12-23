@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://d8n7u4mavc75"]
+
+[ext_resource type="Script" path="res://rigid_body_2d.gd" id="1_l1yqp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avyir"]
+size = Vector2(34, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+script = ExtResource("1_l1yqp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_avyir")
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
+position = Vector2(13, -18)
+rotation = 1.5708
+polygon = PackedVector2Array(0, 26, 35, 13, 0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
