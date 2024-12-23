@@ -13,4 +13,4 @@ var target: Kinematic2D
 
 func get_steering() -> SteeringOutput2D:
 	push_error("Called get_steering in AbstractSteering class! Instantiate a behaviour class instead!")
-	return null
+	return SteeringOutput2D.new()

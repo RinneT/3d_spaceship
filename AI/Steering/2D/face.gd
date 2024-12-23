@@ -8,10 +8,11 @@ func get_steering() -> SteeringOutput2D:
 	
 	# Check for a zero direction and make no change if so
 	if direction.length() == 0:
-		return null
+		return SteeringOutput2D.new()
 	
 	# Put the target together
-	target.orientation = atan2(-direction.x, direction.y)
+	target = target.clone()
+	target.orientation = atan2(direction.x, direction.y)
 	
 	# Delegate to align
 	return super.get_steering()

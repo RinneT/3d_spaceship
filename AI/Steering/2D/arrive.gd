@@ -28,7 +28,7 @@ func get_steering() -> SteeringOutput2D:
 	
 	# Check if we are there, return no steering
 	if distance < target_radius:
-		return null
+		return SteeringOutput2D.new()
 	
 	# If we are outside the slow radius, go max speed
 	# Otherwise scale the desired speed down

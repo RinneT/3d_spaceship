@@ -7,7 +7,7 @@ func get_steering() -> SteeringOutput2D:
 	
 	# Check for a zero direction and make no change if so
 	if character.velocity.length() == 0:
-		return null
+		return steering
 	
 	# Otherwise set the target direction based on velocity
 	var target: Kinematic2D = character.duplicate()

@@ -23,7 +23,7 @@ size = Vector3(11.8523, 3.05951, 10.5516)
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.560841, -0.511131, 0.651308, 0, 0.786677, 0.617365, -0.827923, -0.346244, 0.441201, 13.9159, 8.42264, 9.93912)
+transform = Transform3D(0.560841, -0.511131, 0.651308, 0, 0.786677, 0.617365, -0.827923, -0.346244, 0.441201, 26.9015, 20.9827, 20.1827)
 current = true
 script = ExtResource("2_7chbi")
 
@@ -41,7 +41,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1b5jh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.77675, 0, -0.629809, 0.426416, 0.735932, 0.525903, 0.463496, -0.677056, 0.571635, -6.53956, 4.80616, 5.5628)
-shadow_enabled = true
 
 [node name="Space_Ship" type="RigidBody3D" parent="."]
 collision_layer = 0

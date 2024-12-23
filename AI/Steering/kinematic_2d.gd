@@ -27,7 +27,7 @@ func update2D(object: RigidBody2D) -> void:
 func update3D(object: RigidBody3D) -> void:
 	position.x = object.position.x
 	position.y = object.position.z
-	orientation = atan2(object.rotation.x, object.rotation.z)
+	orientation = object.rotation.y
 	velocity.x = object.linear_velocity.x
 	velocity.y = object.linear_velocity.z
 	rotation = object.angular_velocity.y
@@ -49,14 +49,14 @@ func initFrom2D(object: RigidBody2D) -> void:
 # Creates a new initialized Kinematic2D object from a RigidBody3D
 func initFrom3D(object: RigidBody3D) -> void:
 	position = Vector2(object.position.x, object.position.z)
-	orientation = atan2(object.rotation.x, object.rotation.z)
+	orientation = object.rotation.y
 	velocity = Vector2(object.linear_velocity.x, object.linear_velocity.z)
 	rotation = object.angular_velocity.y
 
 # Creates a new initialized Kinematic2D object from a Node3D
 func initFromNode3D(object: Node3D) -> void:
 	position = Vector2(object.position.x, object.position.z)
-	orientation = atan2(object.rotation.x, object.rotation.z)
+	orientation = object.rotation.y
 	velocity = Vector2()
 	rotation = 0
 

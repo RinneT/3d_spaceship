@@ -32,7 +32,7 @@ func get_steering() -> SteeringOutput2D:
 	
 	# Check if we are there, return no steering
 	if rotation_size < target_radius:
-		return null
+		return steering
 	
 	# If we are outside the slow radius, use maximum rotation
 	# Otherwise, calculate a scaled rotation
