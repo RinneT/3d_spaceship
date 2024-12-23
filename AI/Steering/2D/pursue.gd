@@ -1,32 +1,23 @@
 class_name Pursue
 extends Seek
 
-var max_prediction: float
-
 # Pursue algorithm to find an efficient intercept course to a target
 func get_steering() -> SteeringOutput2D:
-	if !max_prediction:
-		push_error("max_prediction not set for Pursue behaviour!")
+	# Work out the distance to the target
+	var direction = _target.position - _character.position
+	var distance = direction.length()
 	
-	if target:
-		var predicted_target: Kinematic2D = target.clone()
-			
-		# Work out the distance to the target
-		var direction = target.position - character.position
-		var distance = direction.length()
+	# Work out our current speed
+	var speed = character.velocity.length()
+	
+	# Check if the speed is too small to give a reasonable prediction time
+	# Otherwise calculate the prediction time
+	var prediction = character.max_prediction
+	if speed > distance / character.max_prediction:
+		prediction = distance / speed
 		
-		# Work out our current speed
-		var speed = character.velocity.length()
-		
-		# Check if the speed is too small to give a reasonable prediction time
-		# Otherwise calculate the prediction time
-		var prediction = max_prediction
-		if speed > distance / max_prediction:
-			prediction = distance / speed
-		
-		# Put the target together
-		predicted_target.position = target.velocity * prediction
-		target = predicted_target
+	# Put the target together
+	_target.position = _target.velocity * prediction
 	
 	# Delegate to seek
 	return super.get_steering()

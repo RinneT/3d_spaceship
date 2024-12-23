@@ -22,7 +22,7 @@ func _ready() -> void:
 	behaviour.target_radius = target_radius
 	behaviour.time_to_target = time_to_target
 	behaviour.max_angular_acceleration = max_angular_acceleration
-	behaviour.character = character
+	behaviour._character = character
 	behaviour.target = target
 
 
