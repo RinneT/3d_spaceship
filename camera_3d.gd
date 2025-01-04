@@ -27,7 +27,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	set_cursor_position(delta)
+	zoom_camera()
 	#ship.apply_torque(torque)
+
+func zoom_camera() -> void:
+	self.look_at(ship.global_position)
 
 func set_cursor_position(delta: float):
 	# https://www.youtube.com/watch?v=mJRDyXsxT9g

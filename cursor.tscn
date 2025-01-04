@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3knbfyyeqtox"]
+[gd_scene load_steps=11 format=3 uid="uid://3knbfyyeqtox"]
 
 [ext_resource type="PackedScene" uid="uid://dvgeo1fjxe7w3" path="res://Assets/Models/Direction_Arrow.glb" id="1_ya7cc"]
 [ext_resource type="Script" path="res://camera_3d.gd" id="2_7chbi"]
@@ -17,13 +17,22 @@ emission_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_lfbh3"]
 size = Vector3(11.8523, 3.05951, 10.5516)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_la2xa"]
+angle_min = 1.07288e-05
+angle_max = 439.4
+spread = 0.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ukegy"]
+
 [node name="Cursor" type="Node3D"]
 
 [node name="Direction_Arrow" parent="." instance=ExtResource("1_ya7cc")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.560841, -0.511131, 0.651308, 0, 0.786677, 0.617365, -0.827923, -0.346244, 0.441201, 26.9015, 20.9827, 20.1827)
+transform = Transform3D(0.473985, -0.852498, 0.220423, 0.299803, 0.391616, 0.869917, -0.827923, -0.346244, 0.441201, 26.9015, 80.9651, 20.1827)
 current = true
 script = ExtResource("2_7chbi")
 
@@ -40,11 +49,12 @@ mesh = SubResource("SphereMesh_8reke")
 surface_material_override/0 = SubResource("StandardMaterial3D_1b5jh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.77675, 0, -0.629809, 0.426416, 0.735932, 0.525903, 0.463496, -0.677056, 0.571635, -6.53956, 4.80616, 5.5628)
+transform = Transform3D(0.77675, -3.47234e-07, -0.629809, 0.426416, 0.735932, 0.525903, 0.463496, -0.677056, 0.571635, -6.53956, 22.6201, 5.5628)
 
 [node name="Space_Ship" type="RigidBody3D" parent="."]
 collision_layer = 0
 collision_mask = 0
+mass = 400000.0
 script = ExtResource("3_hswe5")
 
 [node name="Space_Ship_Mesh" parent="Space_Ship" instance=ExtResource("3_82nvv")]
@@ -52,3 +62,10 @@ script = ExtResource("3_hswe5")
 [node name="Space_Ship_Collision" type="CollisionShape3D" parent="Space_Ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.114975, 0.483795, 0.338318)
 shape = SubResource("BoxShape3D_lfbh3")
+
+[node name="Thruster_Particles" type="GPUParticles3D" parent="Space_Ship"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_la2xa")
+draw_pass_1 = SubResource("SphereMesh_ukegy")
